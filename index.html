@@ -30,6 +30,271 @@ var ccsrv="cc.naver.com";
    
 
     
+<script type="text/javascript">
 
+var Mkt = {};
+Mkt.Config = {
+	
+	SNS_TITLE : "[네이버에 숨겨진 캠페인과 서비스를 찾아라!]",
+	SNS_CONTENT : "검색, 뉴스 말고도 몰랐던 네이버의 다양한 서비스와 캠페인 게임으로 찾아보자. 지금은 손가락 스트레칭 할시간, 헬로 네이버!"
+	
+};
+
+var oTimer = new jindo.Timer();
+var oTimer2 = new jindo.Timer();
+var oTimer3 = new jindo.Timer();
+var oTimer4 = new jindo.Timer();
+var oTimer5 = new jindo.Timer();
+var timeCount = 0;
+var time = 10;
+var gameSuccessType = false;
+
+var _userAgent = new String(navigator.userAgent);
+var _flatform = 'default';
+if (_userAgent.match(/iPad|iPod/i) != null) {
+	_flatform = "iOS";
+}
+
+var thisGame;
+
+jQuery(document).ready(function() {
+
+	oTimer.start(function() {
+	   //실행할 함수 정의
+	   	jQuery('#game_area').fadeIn(500, function() {
+	   		jQuery('.spot').removeClass('splash');
+	   		jQuery('#game_area').css('display', 'block');
+		});
+	   return false; //setInterval()처럼 반복 실행시키고 싶으면 true를 리턴한다. (아닌경우 생략가능)
+	}, 1000);
+
+	cube_block();
+});
+
+function onLoad()
+{
+	bxm.load('gameDIV', onGameEvent);
+}
+
+function onGameEvent(game, event, value)
+{
+	switch(event){
+
+		// 타임 오버 혹은 올 클리어 상황에서 호출됩니다.
+		case bxm.Event.ON_END:
+			if (window.console) console.log('Game ended with :'+value);
+			jQuery('#game_over').css('display', 'none');
+
+			timeCount = 0;
+			time = 10;
+
+			if (value == 10) {
+				game_again();
+			} else {
+				jQuery('#game_area').fadeOut(500, function() {
+			   		jQuery('#game_area').css('display', 'none');
+			   		jQuery('.game_end').css('display', 'block');
+			   		jQuery('#game_count').css('display', 'block');
+			   		jQuery('#game_retry').css('display', 'block');
+
+			   		start_timer();
+				});
+			}
+			break;
+		
+		// 게임 실행 준비가 완료되면 호출됩니다.
+		// 이때 클리어된 이벤트 수를 전달하며 이에따라 상황에 맞게 처리 하면 됩니다.
+		case bxm.Event.ON_START:
+			if (window.console) console.log('Game started with : '+value);
+			timeCount = 0;
+			time = 10;
+
+			if(_flatform == "iOS") {
+				jQuery('#game_area').removeClass('game_area');
+				jQuery('#game_area').addClass('game_ios_area');
+				jQuery('#gameDIV').removeClass('hn_game');
+				jQuery('#gameDIV').addClass('hn_ios_game');
+				jQuery('#gameDIV').css('background-color', '');
+			}
+			if (value == 10) {
+				thisGame = game;
+				thisGame.renew();
+			} else if (value == 0) {
+				//document.getElementById('btnStart').style.display = 'block';
+			} else {
+				thisGame = game;
+				thisGame.renew();
+				//document.getElementById('btnRetry').style.display = 'block';
+			}
+			break;
+
+		case bxm.Event.ON_LOAD:
+			if (window.console) console.log('Game ON_LOAD with : '+value);
+			
+			timeCount = 0;
+			time = 10;
+			
+			if (value){
+				thisGame = game;
+				game_start();
+			}
+			break;
+	}
+}
+
+function game_start() {
+	// 게임 시작
+		if (thisGame) {
+			thisGame.start();
+		}
+}
+
+function start_timer() {
+
+	jQuery('#time').attr('class', 'num num10');
+	
+	oTimer.start(function() {
+
+	   if(time < 0) {
+			time = 0;
+	   }
+	   
+	   jQuery('#time').attr('class', 'num num'+time);
+
+	   timeCount++;
+	   time--;
+
+	   if(timeCount == 12) {
+			return false;
+	   } else {
+		   if(timeCount == 11) {
+				game_over();
+		   }
+	   	   return true; //setInterval()처럼 반복 실행시키고 싶으면 true를 리턴한다. (아닌경우 생략가능)
+	   }
+	}, 1000);
+}
+
+function retry() {
+	timeCount = 0;
+	time = 10;
+	jQuery('#game_over').css('display', 'none');
+	jQuery('#game_area').css('display', 'block');
+	if (thisGame) {
+		thisGame.retry();
+	}
+}
+
+function game_over() {
+	jQuery('#game_retry').css('display', 'none');
+	jQuery('#game_over').css('display', 'block');
+}
+
+function restart() {
+	retry();
+}
+
+function game_again() {
+	jQuery('.game_end').css('display', 'block');
+	jQuery('#game_area').css('display', 'none');
+	jQuery('#game_retry').css('display', 'none');
+	jQuery('#game_count').css('display', 'none');
+	jQuery('#game_over').css('display', 'none');
+	jQuery('#geme_again').css('display', 'block');
+}
+
+function game_again_play() {
+	jQuery('.game_end').css('display', 'none');
+	jQuery('#game_retry').css('display', 'none');
+	jQuery('#game_count').css('display', 'none');
+	jQuery('#game_over').css('display', 'none');
+	jQuery('#geme_again').css('display', 'none');
+
+	jQuery('#game_area').css('display', 'block');
+	
+	// 게임 리셋
+	if (thisGame) {
+		thisGame.renew();
+	}
+}
+
+function cube_map(key) {
+	oTimer3.pause();
+	jQuery('.cube_area').attr('class', 'cube_area '+key);
+}
+function cube_map_out() {
+	oTimer3.resume();
+}
+
+var cubeCount = 1;
+function cube_block() {
+
+	oTimer3.start(function() {
+		//실행할 함수 정의
+		jQuery('.cube_area').attr('class', 'cube_area v'+cubeCount);
+		cubeCount++;
+		if(cubeCount > 10) {
+			cubeCount = 1;
+		}
+		return true; //setInterval()처럼 반복 실행시키고 싶으면 true를 리턴한다. (아닌경우 생략가능)
+	}, 1500);
+}
+
+//페이스북 퍼가기
+function facebook(v_title, v_url){
+	title = Mkt.Config.SNS_TITLE;
+	var summary = encodeURIComponent(Mkt.Config.SNS_CONTENT);
+
+	var url = encodeURIComponent(Mkt.Config.URL);
+	
+	facebookURL = "http://www.facebook.com/sharer.php?s=100&p[url]=" + url + "&p[images][0]=" + image + "&p[title]=" + encodeURIComponent(title) + "&p[summary]=" + summary;
+	clickcr(this,'itr.fb','','',event);
+	window.open(facebookURL, "FACEBOOK");
+}
+//트위터 퍼가기
+function twitter(v_title, v_url){
+	title = Mkt.Config.SNS_TITLE + " " + Mkt.Config.SNS_CONTENT;
+	
+	if (!v_url) v_url = Mkt.Config.URL;
+	if (!v_title) v_title = title;
+
+	var twitterURL = "http://twitter.com/home?status=" + encodeURIComponent(v_title + ": " + v_url);
+	clickcr(this,'itr.tw','','',event);	
+	window.open(twitterURL, "TWITTER");
+}
+
+function band() {
+	var msg = encodeURIComponent(Mkt.Config.SNS_TITLE + " " + Mkt.Config.SNS_CONTENT + " " + Mkt.Config.URL);
+	window.open("http://www.band.us/plugin/share?body="+msg, "share_band", "width=410, height=400, resizable=no");
+}
+
+function setScrap(type) {
+
+	clickcr(this,'itr.blog','','',event);	
+	
+	document.charset = 'euc-kr';
+
+	var sourceContents = '<div class="layer2">';
+	sourceContents += '<a href="'+ Mkt.Config.URL +'" class="s_more"><img src="img/facebook_v2.jpg" width="560" height="292"></a>';
+	sourceContents += '</div>';
+	
+    var info = {
+	    source_title : Mkt.Config.SNS_TITLE,
+	    source_url : Mkt.Config.URL,
+	    title : Mkt.Config.SNS_CONTENT,
+	    source_contents : sourceContents,
+	    callbackUrl:'',
+	    callbackEncoding:false
+	}
+	
+	JScrap.setScrap(type, info);    
+
+    document.charset = 'utf-8';
+}
+
+</script>
+<script type="text/javascript">
+lcs_do();
+</script>
 </body>
 </html>
