@@ -12,12 +12,14 @@
 
 	$.mktShare = {
 
+		_bInit : false,
 		bAndroid : (navigator.userAgent.indexOf("Android") > -1),
 		bIOS : ((navigator.userAgent.indexOf("iPhone") > -1) || (navigator.userAgent.indexOf("iPad") > -1)),
 		isMobile : function(){
 			return this.bAndroid || this.bIOS;
 		},
 		sMobileErrorMessage : "모바일 환경이 아닙니다.",
+		sInitErrorMessage : "플러그인이 초기화되지 않았습니다.",
 		sCommonMessage : null,
 		sUrl : null,
 		oOptions : {
@@ -30,9 +32,9 @@
 			kakaoStory : null,
 			kakaoStoryDomain : document.domain,
 			kakaoStoryTitle : document.title,
-			cafeBlogImageUrl : null,
-			cafeBlogTitle : null,
-			cafeBlogOrigin : null
+			cafeBlogImageUrl : $('meta[property="og:image"]').attr('content'),
+			cafeBlogTitle : document.title,
+			cafeBlogOrigin : document.domain
 
 		},
 
@@ -41,6 +43,43 @@
 			this.sCommonMessage = sMessage;
 			this.sUrl = sUrl;
 			$.extend(this.oOptions,oOptions);
+
+			this._appendCafeBlogForm(sUrl);
+
+			this._bInit = true;
+
+		},
+
+		_appendCafeBlogForm : function(sUrl){
+
+			if(this.isMobile()){
+
+				document.write("<form name='JScrapForm' id='JScrapForm' method='post' accept-charset='utf-8'>");
+				document.write("<input type='hidden' name='blogId' id='blogId' value='naver'>");
+				document.write("<input type='hidden' name='source_type' id='source_type' value='112'>");
+				document.write("<input type='hidden' name='source_title' id='source_title'>");
+				document.write("<input type='hidden' name='source_url' id='source_url'>");
+				document.write("<input type='hidden' name='title' id='title'>");
+				document.write("<input type='hidden' name='source_contents' id='source_contents'>");
+				document.write("<input type='hidden' name='callbackUrl' id='callbackUrl'>");
+				document.write("<input type='hidden' name='callbackEncoding' id='callbackEncoding'>");
+				document.write("<input type='hidden' name='returnUrl' id='returnUrl' value='" + encodeURIComponent(sUrl) + "'>");
+				document.write("</form>");
+
+			}else{
+
+				document.write("<form name='JScrapForm' id='JScrapForm' method='post' accept-charset='euc-kr'>");
+				document.write("<input type='hidden' name='blogId' id='blogId' value='naver'>");
+				document.write("<input type='hidden' name='source_type' id='source_type' value='66'>");
+				document.write("<input type='hidden' name='source_title' id='source_title'>");
+				document.write("<input type='hidden' name='source_url' id='source_url'>");
+				document.write("<input type='hidden' name='title' id='title'>");
+				document.write("<input type='hidden' name='source_contents' id='source_contents'>");
+				document.write("<input type='hidden' name='callbackUrl' id='callbackUrl'>");
+				document.write("<input type='hidden' name='callbackEncoding' id='callbackEncoding'>");
+				document.write("</form>");
+
+			}
 
 		},
 
@@ -133,7 +172,20 @@
 
 		},
 
+		_scrapNaverForPC : function(nType){
+
+		},
+
+		_scrapNaverForMobile : function(nType){
+
+		},
+
 		facebook : function(){
+
+			if(this._bInit == false){
+				alert(this.sInitErrorMessage);
+				return false;
+			}
 
 			var sTargetUrl = this.sUrl;
 
@@ -157,6 +209,11 @@
 		},
 
 		twitter : function(){
+
+			if(this._bInit == false){
+				alert(this.sInitErrorMessage);
+				return false;
+			}
 
 			var sMessage = this._getMessage("twitter");
 			var sUrl = this._getShortUrl();
@@ -182,6 +239,11 @@
 
 		line : function(){
 
+			if(this._bInit == false){
+				alert(this.sInitErrorMessage);
+				return false;
+			}
+
 			if(this.isMobile() == false){
 				alert(this.sMobileErrorMessage);
 				return false;
@@ -197,6 +259,11 @@
 		},
 
 		band : function(){
+
+			if(this._bInit == false){
+				alert(this.sInitErrorMessage);
+				return false;
+			}
 
 			var sMessage = this._getMessage("band") + "\n\n" + this._getShortUrl();
 			var sEncodedMessage = this._replaceXssString(encodeURIComponent(sMessage));
@@ -220,6 +287,11 @@
 		},
 
 		kakaoTalk : function(){
+
+			if(this._bInit == false){
+				alert(this.sInitErrorMessage);
+				return false;
+			}
 
 			if(this.isMobile() == false){
 				alert(this.sMobileErrorMessage);
@@ -273,7 +345,10 @@
 
 		kakaoStory : function(){
 
-			
+			if(this._bInit == false){
+				alert(this.sInitErrorMessage);
+				return false;
+			}
 
 			if(this.isMobile()){
 
@@ -293,8 +368,8 @@
 
 				/* 
 
-				카카오스토리 비공식 API로 카카오측의 별도의 공지없이 변경될 수 있기에 사용을 권장하지 않음.
-				공식적인 방법으로 사용하려면 https://developers.kakao.com 에서 앱 등록 후 사용해야 함.
+				// 카카오스토리 비공식 API로 카카오측의 별도의 공지없이 변경될 수 있기에 사용을 권장하지 않음.
+				// 공식적인 방법으로 사용하려면 https://developers.kakao.com 에서 앱 등록 후 사용해야 함.
 
 				var sEncodedMessage = encodeURIComponent(this._getShortUrl());
 				
@@ -304,6 +379,26 @@
 				window.open("https://story.kakao.com/share?url="+sEncodedMessage, "SHARE_BAND", "width=418, height=533, resizable=no"+",top="+ nTop +",left=" + nLeft);
 				*/
 
+			}
+
+		},
+
+		naverCafe : function(){
+
+			if(this.isMobile()){
+				_scrapNaverForMobile("cafe");
+			}else{
+				_scrapNaverForPC("cafe");
+			}
+
+		},
+
+		naverBlog : function(){
+
+			if(this.isMobile()){
+				_scrapNaverForMobile("blog");
+			}else{
+				_scrapNaverForPC("blog");
 			}
 
 		}
