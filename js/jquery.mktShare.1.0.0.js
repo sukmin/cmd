@@ -57,15 +57,15 @@
 
 			if(this.isMobile()){
 
-				document.write("<form name='JScrapForm' id='JScrapForm' method='post' accept-charset='utf-8'>");
+				document.write("<form name='JScrapForm' id='JScrapForm' method='post' accept-charset='utf-8' target='_self'>");
 				document.write("<input type='hidden' name='blogId' id='cafe_blog_blogId' value='naver'>");
 				document.write("<input type='hidden' name='source_type' id='cafe_blog_source_type' value='112'>");
 				document.write("<input type='hidden' name='source_title' id='cafe_blog_source_title'>");
 				document.write("<input type='hidden' name='source_url' id='cafe_blog_source_url'>");
 				document.write("<input type='hidden' name='title' id='cafe_blog_title'>");
 				document.write("<input type='hidden' name='source_contents' id='cafe_blog_source_contents'>");
-				document.write("<input type='hidden' name='callbackUrl' id='cafe_blog_callbackUrl'>");
-				document.write("<input type='hidden' name='callbackEncoding' id='cafe_blog_callbackEncoding'>");
+				document.write("<input type='hidden' name='callbackUrl' id='cafe_blog_callbackUrl' value=''>");
+				document.write("<input type='hidden' name='callbackEncoding' id='cafe_blog_callbackEncoding' value='false'>");
 				document.write("<input type='hidden' name='returnUrl' id='cafe_blog_returnUrl' value='" + encodeURIComponent(sUrl) + "'>");
 				document.write("</form>");
 
@@ -175,14 +175,9 @@
 
 		},
 
-		_scrapNaverForPC : function(sType){
+		_setNaverScrapInputData : function(){
 
-			if(this._elCafeBlogOpenWindow !== null){
-				this._elCafeBlogOpenWindow.close();
-				this._elCafeBlogOpenWindow = null;
-			}
-
-    	    $("#cafe_blog_source_title").val(this.oOptions.cafeBlogSourceTitle);
+			$("#cafe_blog_source_title").val(this.oOptions.cafeBlogSourceTitle);
     	    $("#cafe_blog_source_url").val(this.oOptions.cafeBlogSourceUrl);
     	    $("#cafe_blog_title").val(this._getMessage("cafeBlog"));
 
@@ -191,7 +186,18 @@
 			sContents += '</div>';
 			$("#cafe_blog_source_contents").val(sContents);
 
-			var scrapForm$ = jQuery("#JScrapForm");
+		},
+
+		_scrapNaverForPC : function(sType){
+
+			if(this._elCafeBlogOpenWindow !== null){
+				this._elCafeBlogOpenWindow.close();
+				this._elCafeBlogOpenWindow = null;
+			}
+
+    	    this._setNaverScrapInputData();
+
+    	    var scrapForm$ = jQuery("#JScrapForm");
 
 			if(sType == "cafe"){
 				scrapForm$.attr("action","http://cafe.naver.com/CafeScrapView.nhn");
@@ -215,6 +221,20 @@
 		},
 
 		_scrapNaverForMobile : function(sType){
+
+			this._setNaverScrapInputData();
+
+			var scrapForm$ = jQuery("#JScrapForm");
+
+			if(sType == "cafe"){
+				scrapForm$.attr("action","http://m.cafe.naver.com/CafeScrapView.nhn");
+			}else if(sType == "blog"){
+				scrapForm$.attr("action","http://m.blog.naver.com/OpenScrapForm.nhn");
+			}else{
+				// do noting
+			}
+
+			scrapForm$.submit();
 
 		},
 
@@ -423,6 +443,11 @@
 
 		naverCafe : function(){
 
+			if(this._bInit == false){
+				alert(this.sInitErrorMessage);
+				return false;
+			}
+
 			if(this.isMobile()){
 				this._scrapNaverForMobile("cafe");
 			}else{
@@ -432,6 +457,11 @@
 		},
 
 		naverBlog : function(){
+
+			if(this._bInit == false){
+				alert(this.sInitErrorMessage);
+				return false;
+			}
 
 			if(this.isMobile()){
 				this._scrapNaverForMobile("blog");
