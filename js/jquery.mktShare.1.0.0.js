@@ -214,6 +214,58 @@
 
 			}
 
+		},
+
+		kakaoTalk : function(){
+
+			if(this.isMobile() == false){
+				alert(this.sMobileErrorMessage);
+				return false;
+			}
+
+			var sMessage = this._getMessage("kakaoTalk");
+			var sUrl = this._getShortUrl();
+
+			// NAVER 소셜플러그인 공용키
+			var sAppKey = "a75401c7bab624021c9af4778bf81cfd";
+
+			var aKakao = [
+				{
+					objtype : "label",
+					text : sMessage
+				},
+				{
+					objtype : "button",
+					text : "네이버앱으로 열기",
+					action : {
+
+						type : "app",
+						actioninfo : [
+							{
+								os: "android",
+								execparam: "url=" + encodeURIComponent(sUrl)
+							},
+							{
+								os: "ios",
+								devicetype: "phone",
+								execparam: "url=" + encodeURIComponent(sUrl)
+							},
+							{
+								os: "ios",
+								devicetype: "pad",
+								execparam: "url=" + encodeURIComponent(sUrl)
+							}
+						]
+
+					}
+				}
+			];
+
+			var sKakaoTalkUrl = "kakaolink://send?appkey=" + sAppKey + "&appver=1.0&apiver=3.0&linkver=3.5&objs=" + encodeURIComponent(JSON.stringify(aKakao));
+
+			//_sendApp : function(sMessage,sIosUrl,sAndroidPakace,sIframeId)
+			this._sendApp(sKakaoTalkUrl,"http://itunes.apple.com/app/id362057947","com.kakao.talk","_shareKakaoTalkIframe");
+
 		}
 
 	};
