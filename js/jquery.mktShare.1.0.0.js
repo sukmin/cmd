@@ -22,11 +22,14 @@
 		sUrl : null,
 		oOptions : {
 
-			shortUrl : null ,
+			shortUrl : null,
 			twitter : null,
 			band : null,
 			line : null,
 			kakaoTalk : null,
+			kakaoStory : null,
+			kakaoStoryDomain : "naver.com",
+			kakaoStoryTitle : "네이버",
 			cafeBlogImageUrl : null,
 			cafeBlogTitle : null,
 			cafeBlogOrigin : null
@@ -143,8 +146,8 @@
 
 			}else{
 
-				var nTop = (jQuery(window).height() - 400) / 2;
-				var nLeft = (jQuery(window).width() - 555) / 2;
+				var nTop = ($(window).height() - 400) / 2;
+				var nLeft = ($(window).width() - 555) / 2;
 	
 				var sPcFacebookUrl = "http://www.facebook.com/sharer.php?u="+sEncodedUrl;
 				window.open(sPcFacebookUrl, "SHARE_FACEBOOK","width=555, height=400"+",top="+ nTop +",left=" + nLeft);
@@ -167,8 +170,8 @@
 
 			}else{
 
-				var nTop = (jQuery(window).height() - 440) / 2;
-				var nLeft = (jQuery(window).width() - 560) / 2;
+				var nTop = ($(window).height() - 440) / 2;
+				var nLeft = ($(window).width() - 560) / 2;
 	
 				var sPcTwitterURL = "http://twitter.com/home?status=" + sEncodedMessage;	
 				window.open(sPcTwitterURL, "SHARE_TWITTER", "width=560, height=440"+",top="+ nTop +",left=" + nLeft);
@@ -207,8 +210,8 @@
 	
 			}else{
 
-				var nTop = (jQuery(window).height() - 533) / 2;
-				var nLeft = (jQuery(window).width() - 418) / 2;
+				var nTop = ($(window).height() - 533) / 2;
+				var nLeft = ($(window).width() - 418) / 2;
 
 				window.open("http://www.band.us/plugin/share?body="+sEncodedMessage, "SHARE_BAND", "width=418, height=533, resizable=no"+",top="+ nTop +",left=" + nLeft);
 
@@ -265,6 +268,30 @@
 
 			//_sendApp : function(sMessage,sIosUrl,sAndroidPakace,sIframeId)
 			this._sendApp(sKakaoTalkUrl,"http://itunes.apple.com/app/id362057947","com.kakao.talk","_shareKakaoTalkIframe");
+
+		},
+
+		kakaoStory : function(){
+
+			var sMessage = this._getMessage("kakaoStory") + "\n\n" + this._getShortUrl();
+			var sEncodedMessage = this._replaceXssString(encodeURIComponent(sMessage));
+
+			if(this.isMobile()){
+
+				// storylink://posting?post=  &appid=  &appver=  &apiver=  &appname=  &urlinfo= 
+				var sKakaoStoryUrl = "storylink://posting?post="+sEncodedMessage+"&appid="+this.oOptions.kakaoStoryDomain+"&appver=1.0&apiver=1.0&appname="+encodeURIComponent(this.oOptions.kakaoStoryTitle);
+				
+				//_sendApp : function(sMessage,sIosUrl,sAndroidPakace,sIframeId)
+				this._sendApp(sKakaoStoryUrl,"http://itunes.apple.com/app/id486244601","com.kakao.story","_shareKakaoStoryIframe");							
+	
+			}else{
+
+				//var nTop = ($(window).height() - 533) / 2;
+				//var nLeft = ($(window).width() - 418) / 2;
+
+				//window.open("http://www.band.us/plugin/share?body="+sEncodedMessage, "SHARE_BAND", "width=418, height=533, resizable=no"+",top="+ nTop +",left=" + nLeft);
+
+			}
 
 		}
 
