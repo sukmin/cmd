@@ -184,10 +184,11 @@
 				return false;
 			}
 
-			var sMessage = "line://msg/text/" + this._replaceXssString(encodeURIComponent(this._getMessage("line")));
+			var sMessage = this._getMessage("line") + "\n\n" + this._getShortUrl();
+			var sEncodedMessage = "line://msg/text/" + this._replaceXssString(encodeURIComponent(sMessage));
 
 			//_sendApp : function(sMessage,sIosUrl,sAndroidPakace,sIframeId)
-			this._sendApp(sMessage,"https://itunes.apple.com/kr/app/line/id443904275","jp.naver.line.android","_shareLineIframe");
+			this._sendApp(sEncodedMessage,"https://itunes.apple.com/kr/app/line/id443904275","jp.naver.line.android","_shareLineIframe");
 
 		}
 
