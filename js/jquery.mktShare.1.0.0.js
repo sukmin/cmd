@@ -22,6 +22,8 @@
 		sInitErrorMessage : "플러그인이 초기화되지 않았습니다.",
 		sCommonMessage : null,
 		sUrl : null,
+		sCafeBlogOpenWindowName : "NAVER_SCRAP",
+		_elCafeBlogOpenWindow : null,
 		oOptions : {
 
 			shortUrl : null,
@@ -32,9 +34,10 @@
 			kakaoStory : null,
 			kakaoStoryDomain : document.domain,
 			kakaoStoryTitle : document.title,
+			cafeBlog : null,
 			cafeBlogImageUrl : $('meta[property="og:image"]').attr('content'),
-			cafeBlogTitle : document.title,
-			cafeBlogOrigin : document.domain
+			cafeBlogSourceTitle : document.title,
+			cafeBlogSourceUrl : document.domain
 
 		},
 
@@ -55,28 +58,28 @@
 			if(this.isMobile()){
 
 				document.write("<form name='JScrapForm' id='JScrapForm' method='post' accept-charset='utf-8'>");
-				document.write("<input type='hidden' name='blogId' id='blogId' value='naver'>");
-				document.write("<input type='hidden' name='source_type' id='source_type' value='112'>");
-				document.write("<input type='hidden' name='source_title' id='source_title'>");
-				document.write("<input type='hidden' name='source_url' id='source_url'>");
-				document.write("<input type='hidden' name='title' id='title'>");
-				document.write("<input type='hidden' name='source_contents' id='source_contents'>");
-				document.write("<input type='hidden' name='callbackUrl' id='callbackUrl'>");
-				document.write("<input type='hidden' name='callbackEncoding' id='callbackEncoding'>");
-				document.write("<input type='hidden' name='returnUrl' id='returnUrl' value='" + encodeURIComponent(sUrl) + "'>");
+				document.write("<input type='hidden' name='blogId' id='cafe_blog_blogId' value='naver'>");
+				document.write("<input type='hidden' name='source_type' id='cafe_blog_source_type' value='112'>");
+				document.write("<input type='hidden' name='source_title' id='cafe_blog_source_title'>");
+				document.write("<input type='hidden' name='source_url' id='cafe_blog_source_url'>");
+				document.write("<input type='hidden' name='title' id='cafe_blog_title'>");
+				document.write("<input type='hidden' name='source_contents' id='cafe_blog_source_contents'>");
+				document.write("<input type='hidden' name='callbackUrl' id='cafe_blog_callbackUrl'>");
+				document.write("<input type='hidden' name='callbackEncoding' id='cafe_blog_callbackEncoding'>");
+				document.write("<input type='hidden' name='returnUrl' id='cafe_blog_returnUrl' value='" + encodeURIComponent(sUrl) + "'>");
 				document.write("</form>");
 
 			}else{
 
 				document.write("<form name='JScrapForm' id='JScrapForm' method='post' accept-charset='euc-kr'>");
-				document.write("<input type='hidden' name='blogId' id='blogId' value='naver'>");
-				document.write("<input type='hidden' name='source_type' id='source_type' value='66'>");
-				document.write("<input type='hidden' name='source_title' id='source_title'>");
-				document.write("<input type='hidden' name='source_url' id='source_url'>");
-				document.write("<input type='hidden' name='title' id='title'>");
-				document.write("<input type='hidden' name='source_contents' id='source_contents'>");
-				document.write("<input type='hidden' name='callbackUrl' id='callbackUrl'>");
-				document.write("<input type='hidden' name='callbackEncoding' id='callbackEncoding'>");
+				document.write("<input type='hidden' name='blogId' id='cafe_blog_title_blogId' value='naver'>");
+				document.write("<input type='hidden' name='source_type' id='cafe_blog_source_type' value='66'>");
+				document.write("<input type='hidden' name='source_title' id='cafe_blog_source_title'>");
+				document.write("<input type='hidden' name='source_url' id='cafe_blog_source_url'>");
+				document.write("<input type='hidden' name='title' id='cafe_blog_title'>");
+				document.write("<input type='hidden' name='source_contents' id='cafe_blog_source_contents'>");
+				document.write("<input type='hidden' name='callbackUrl' id='cafe_blog_callbackUrl' value=''>");
+				document.write("<input type='hidden' name='callbackEncoding' id='cafe_blog_callbackEncoding' value='false'>");
 				document.write("</form>");
 
 			}
@@ -172,11 +175,46 @@
 
 		},
 
-		_scrapNaverForPC : function(nType){
+		_scrapNaverForPC : function(sType){
+
+			if(this._elCafeBlogOpenWindow !== null){
+				this._elCafeBlogOpenWindow.close();
+				this._elCafeBlogOpenWindow = null;
+			}
+
+    	    $("#cafe_blog_source_title").val(this.oOptions.cafeBlogSourceTitle);
+    	    $("#cafe_blog_source_url").val(this.oOptions.cafeBlogSourceUrl);
+    	    $("#cafe_blog_title").val(this.oOptions.cafeBlogSourceUrl);
+
+    	    var sContents = '<div class="layer2">';
+			sContents += '<a href="'+ this.sUrl +'" class="s_more"><img src="'+ this.oOptions.cafeBlogImageUrl +'" ></a>';
+			sContents += '</div>';
+			$("#cafe_blog_source_contents").val(sContents);
+
+			var scrapForm$ = jQuery("#JScrapForm");
+
+			if(sType == "cafe"){
+				scrapForm$.attr("action","http://cafe.naver.com/CafeScrapView.nhn");
+			}else if(sType == "blog"){
+				scrapForm$.attr("action","http://blog.naver.com/ScrapForm.nhn");
+			}else{
+				// do noting
+			}
+
+			this._elCafeBlogOpenWindow = window.open("NAVER",this.sCafeBlogOpenWindowName,"width=400, height=290");
+			scrapForm$.attr("target",this.sCafeBlogOpenWindowName);
+
+			if( this._elCafeBlogOpenWindow !== null ){
+				scrapForm$.submit();
+			}else{
+				setTimeout(function(){
+					scrapForm$.submit();
+				},500);
+			}
 
 		},
 
-		_scrapNaverForMobile : function(nType){
+		_scrapNaverForMobile : function(sType){
 
 		},
 
