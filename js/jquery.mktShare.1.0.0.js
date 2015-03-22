@@ -273,10 +273,12 @@
 
 		kakaoStory : function(){
 
-			var sMessage = this._getMessage("kakaoStory") + "\n\n" + this._getShortUrl();
-			var sEncodedMessage = this._replaceXssString(encodeURIComponent(sMessage));
+			
 
 			if(this.isMobile()){
+
+				var sMessage = this._getMessage("kakaoStory") + "\n\n" + this._getShortUrl();
+				var sEncodedMessage = this._replaceXssString(encodeURIComponent(sMessage));
 
 				// storylink://posting?post=  &appid=  &appver=  &apiver=  &appname=  &urlinfo= 
 				var sKakaoStoryUrl = "storylink://posting?post="+sEncodedMessage+"&appid="+this.oOptions.kakaoStoryDomain+"&appver=1.0&apiver=1.0&appname="+encodeURIComponent(this.oOptions.kakaoStoryTitle);
@@ -286,10 +288,12 @@
 	
 			}else{
 
-				//var nTop = ($(window).height() - 533) / 2;
-				//var nLeft = ($(window).width() - 418) / 2;
+				var sEncodedMessage = encodeURIComponent(this._getShortUrl());
+				
+				var nTop = ($(window).height() - 533) / 2;
+				var nLeft = ($(window).width() - 418) / 2;
 
-				//window.open("http://www.band.us/plugin/share?body="+sEncodedMessage, "SHARE_BAND", "width=418, height=533, resizable=no"+",top="+ nTop +",left=" + nLeft);
+				window.open("https://story.kakao.com/share?url="+sEncodedMessage, "SHARE_BAND", "width=418, height=533, resizable=no"+",top="+ nTop +",left=" + nLeft);
 
 			}
 
