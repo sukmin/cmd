@@ -53,8 +53,8 @@
 
 		_getMessage : function(sType){
 
-			if(this.oOptions[SType] !== null){
-				return this.oOptions[SType];
+			if(this.oOptions[sType] !== null){
+				return this.oOptions[sType];
 			}else{
 				return this.sCommonMessage;
 			}
