@@ -185,10 +185,34 @@
 			}
 
 			var sMessage = this._getMessage("line") + "\n\n" + this._getShortUrl();
-			var sEncodedMessage = "line://msg/text/" + this._replaceXssString(encodeURIComponent(sMessage));
+			var sEncodedMessage = this._replaceXssString(encodeURIComponent(sMessage));
+			var sLineUrl = "line://msg/text/" + sEncodedMessage;
 
 			//_sendApp : function(sMessage,sIosUrl,sAndroidPakace,sIframeId)
-			this._sendApp(sEncodedMessage,"https://itunes.apple.com/kr/app/line/id443904275","jp.naver.line.android","_shareLineIframe");
+			this._sendApp(sLineUrl,"https://itunes.apple.com/kr/app/line/id443904275","jp.naver.line.android","_shareLineIframe");
+
+		},
+
+		band : function(){
+
+			var sMessage = this._getMessage("band") + "\n\n" + this._getShortUrl();
+			var sEncodedMessage = this._replaceXssString(encodeURIComponent(sMessage));
+
+			if(this.isMobile()){
+
+				var sBandUrl = "bandapp://create/post?text=" + sEncodedMessage;
+
+				//_sendApp : function(sMessage,sIosUrl,sAndroidPakace,sIframeId)
+				this._sendApp(sBandUrl,"http://itunes.apple.com/kr/app/id542613198","com.nhn.android.band","_shareBandIframe");
+	
+			}else{
+
+				var nTop = (jQuery(window).height() - 533) / 2;
+				var nLeft = (jQuery(window).width() - 418) / 2;
+
+				window.open("http://www.band.us/plugin/share?body="+sEncodedMessage, "SHARE_BAND", "width=418, height=533, resizable=no"+",top="+ nTop +",left=" + nLeft);
+
+			}
 
 		}
 
