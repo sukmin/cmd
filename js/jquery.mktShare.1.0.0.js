@@ -179,7 +179,13 @@
 
 			$("#cafe_blog_source_title").val(this.oOptions.cafeBlogSourceTitle);
     	    $("#cafe_blog_source_url").val(this.oOptions.cafeBlogSourceUrl);
-    	    $("#cafe_blog_title").val(this._getMessage("cafeBlog"));
+
+    	    if(this.isMobile()){
+    	    	$("#cafe_blog_title").val(this._replaceXssString(this._getMessage("cafeBlog")));	
+    	    }else{
+    	    	$("#cafe_blog_title").val(this._getMessage("cafeBlog"));	
+    	    }
+    	    
 
     	    var sContents = '<div class="layer2">';
 			sContents += '<a href="'+ this.sUrl +'" class="s_more"><img src="'+ this.oOptions.cafeBlogImageUrl +'" ></a>';
