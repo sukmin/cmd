@@ -28,8 +28,8 @@
 			line : null,
 			kakaoTalk : null,
 			kakaoStory : null,
-			kakaoStoryDomain : "naver.com",
-			kakaoStoryTitle : "네이버",
+			kakaoStoryDomain : document.domain,
+			kakaoStoryTitle : document.title,
 			cafeBlogImageUrl : null,
 			cafeBlogTitle : null,
 			cafeBlogOrigin : null
