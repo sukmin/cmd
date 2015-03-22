@@ -424,9 +424,9 @@
 		naverCafe : function(){
 
 			if(this.isMobile()){
-				_scrapNaverForMobile("cafe");
+				this._scrapNaverForMobile("cafe");
 			}else{
-				_scrapNaverForPC("cafe");
+				this._scrapNaverForPC("cafe");
 			}
 
 		},
@@ -434,9 +434,9 @@
 		naverBlog : function(){
 
 			if(this.isMobile()){
-				_scrapNaverForMobile("blog");
+				this._scrapNaverForMobile("blog");
 			}else{
-				_scrapNaverForPC("blog");
+				this._scrapNaverForPC("blog");
 			}
 
 		}
