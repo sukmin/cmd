@@ -288,12 +288,21 @@
 	
 			}else{
 
+				alert(this.sMobileErrorMessage);
+				return false;
+
+				/* 
+
+				카카오스토리 비공식 API로 카카오측의 별도의 공지없이 변경될 수 있기에 사용을 권장하지 않음.
+				공식적인 방법으로 사용하려면 https://developers.kakao.com 에서 앱 등록 후 사용해야 함.
+
 				var sEncodedMessage = encodeURIComponent(this._getShortUrl());
 				
 				var nTop = ($(window).height() - 533) / 2;
 				var nLeft = ($(window).width() - 418) / 2;
 
 				window.open("https://story.kakao.com/share?url="+sEncodedMessage, "SHARE_BAND", "width=418, height=533, resizable=no"+",top="+ nTop +",left=" + nLeft);
+				*/
 
 			}
 
