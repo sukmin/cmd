@@ -37,7 +37,7 @@
 			cafeBlog : null,
 			cafeBlogImageUrl : $('meta[property="og:image"]').attr('content'),
 			cafeBlogSourceTitle : document.title,
-			cafeBlogSourceUrl : document.domain
+			cafeBlogSourceUrl : "http://" + document.domain
 
 		},
 
@@ -184,7 +184,7 @@
 
     	    $("#cafe_blog_source_title").val(this.oOptions.cafeBlogSourceTitle);
     	    $("#cafe_blog_source_url").val(this.oOptions.cafeBlogSourceUrl);
-    	    $("#cafe_blog_title").val(this.oOptions.cafeBlogSourceUrl);
+    	    $("#cafe_blog_title").val(this._getMessage("cafeBlog"));
 
     	    var sContents = '<div class="layer2">';
 			sContents += '<a href="'+ this.sUrl +'" class="s_more"><img src="'+ this.oOptions.cafeBlogImageUrl +'" ></a>';
