@@ -29,7 +29,20 @@
 <script>
 
 // init : function(sMessage, sUrl, oOptions)
-jQuery.mktShare.init('나는 "천재"입니다',"http://sukmin.github.io/cmd/");
+
+jQuery.mktShare.init( "공용내용" , "http://sukmin.github.io/cmd/" ,
+        {   shortUrl : "http://sukmin.github.io/cmd/",
+            twitter : "트윗메세지",
+            band : "밴드메세지",
+            line : "라인메세지",
+            kakaoTalk : "카톡메세지",
+            kakaoStory : "카카오스토리메세지",
+            kakaoStoryDomain : "sukmin.github.io",
+            kakaoStoryTitle : "캠페인",
+            cafeBlog : "카페블로그퍼가기 노출되는 제목",
+            cafeBlogImageUrl : "https://m.campaign.naver.com/pholar/im/blog_cafe.png",
+            cafeBlogSourceTitle : "출처타이틀, 제목하고는 다름",
+            cafeBlogSourceUrl : "http://sukmin.github.io/cmd/" });
 
 jQuery("#facebook").click(function(event){
 
