@@ -9,9 +9,7 @@
 
 </head>
 <body>
-    
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
+<a href="#" id="a_login"> 히힛 나는 로그인버튼 </a><br>
 
 <div id="status">
 </div>
@@ -64,9 +62,7 @@ function statusChangeCallback(response) {
 // Button.  See the onlogin handler attached to it in the sample
 // code below.
 function checkLoginState() {
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
+  
 }
 
 function testAPI() {
@@ -80,6 +76,16 @@ function testAPI() {
        
     });
   }
+  
+  jQuery("#a_login").click(function(event){
+      
+      event.preventDefault();
+      FB.login(function(response) {
+        FB.getLoginStatus(function(response) {
+             statusChangeCallback(response);
+         });
+        }, {scope: 'public_profile,email'});
+  });
 
 
 </script>
