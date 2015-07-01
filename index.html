@@ -73,13 +73,14 @@ function checkLoginState() {
   });
 }
 
-jQuery("#a_facebook_login").click(function(event){
-
-
-	event.preventDefault();
-	checkLoginState();
-	
-});
+function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      console.log('Successful login for: ' + response.name);
+      document.getElementById('status').innerHTML =
+        'Thanks for logging in, ' + response.name + '!';
+    });
+  }
 
 
 </script>
