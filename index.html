@@ -10,6 +10,7 @@
 </head>
 <body>
 <a href="#" id="a_login"> 히힛 나는 로그인버튼 </a><br>
+<a href="#" id="a_noti">노티받기</a>
 
 <div id="status">
 </div>
@@ -65,9 +66,12 @@ function checkLoginState() {
   
 }
 
+var myResponse = null;
+
 function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
+        myResponse = response;
       console.log('Successful login for: ' + response.name);
       console.log('email : ' + response.email);
       document.getElementById('status').innerHTML =
@@ -84,9 +88,22 @@ function testAPI() {
         FB.getLoginStatus(function(response) {
              statusChangeCallback(response);
          });
-        }, {scope: 'public_profile,email'});
+        }, {scope: 'public_profile,email,manage_notifications'});
   });
 
+   jQuery("#jQuery.ajax").click(function(event){
+    event.preventDefault();
+    jQuery.ajax({
+				url: "http://graph.facebook.com/v2.3/"+ myResponse.authResponse.userID +"/notifications",
+				async: true,
+				dataType : "json",
+				data : { "href" : encodeURIComponent("http://campagin.naver.com/v/"), "template" : "You VV!!" },
+				type: 'post',
+                success : function(response){
+                    console.log(response);
+                }
+			});
+   });
 
 </script>
 </body>
