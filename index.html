@@ -107,8 +107,8 @@ function testAPI() {
                 success : function(response){
                     console.log(response);
                 },
-                error : function(){
-                    console.log("err");
+                error : function(e){
+                    console.log("err : " + e);
                 }
 			});
             
