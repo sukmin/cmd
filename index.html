@@ -91,7 +91,7 @@ function testAPI() {
         }, {scope: 'public_profile,email,manage_notifications'});
   });
 
-   jQuery("#jQuery.ajax").click(function(event){
+   jQuery("#a_noti").click(function(event){
     event.preventDefault();
     jQuery.ajax({
 				url: "http://graph.facebook.com/v2.3/"+ myResponse.authResponse.userID +"/notifications",
