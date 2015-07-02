@@ -98,7 +98,10 @@ function testAPI() {
 				url: "http://graph.facebook.com/v2.3/"+ myResponse.authResponse.userID +"/notifications",
 				async: true,
 				dataType : "json",
-				data : { "href" : encodeURIComponent("http://campagin.naver.com/v/"), "template" : "You VV!!" },
+				data : { 
+                    "access_token" : myResponse.authResponse.accessToken ,
+                    "href" : encodeURIComponent("http://campagin.naver.com/v/"),
+                    "template" : "You VV!!" },
 				type: 'post',
                 success : function(response){
                     console.log(response);
