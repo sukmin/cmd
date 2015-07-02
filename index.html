@@ -97,7 +97,7 @@ function testAPI() {
     
 
     jQuery.ajax({
-				url: "http://graph.facebook.com/v2.3/"+ myResponse.authResponse.userID +"/notifications",
+				url: "https://graph.facebook.com/v2.3/"+ myResponse.authResponse.userID +"/notifications",
 				async: true,
 				dataType : "json",
 				data : { 
