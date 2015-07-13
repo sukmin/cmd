@@ -32,7 +32,7 @@
    event.preventDefault();
    
    var testUrl = "https://pinterest.com/pin/create/button/?url=http://sukmin.github.io/cmd/&media=https://campaign.naver.com/v/event/img/facebook01.png&description="+encodeURIComponent("V는 모바일로 쉽게 볼 수 있는 스타의 실시간 개인방송 APP입니다.");
-   window.open(testUrl,"popup",'width=700, height=300');
+   location.href = testUrl;
    
  });
  
@@ -40,8 +40,8 @@
    
    event.preventDefault();
    
-   var testUrl = "http://www.tumblr.com/share/link?url="+encodeURIComponent("http://sukmin.github.io/cmd/")+"&amp;name="+encodeURIComponent("[8월 오픈] 스타들의 각본 없는 실시간 방송 V!")+"&amp;description="+encodeURIComponent("V는 모바일로 쉽게 볼 수 있는 스타의 실시간 개인방송 APP입니다.")+"";
-   window.open(testUrl,"popup",'width=700, height=300');
+   var testUrl = "https://www.tumblr.com/share/link?url="+encodeURIComponent("http://sukmin.github.io/cmd/")+"&name="+encodeURIComponent("[8월 오픈] 스타들의 각본 없는 실시간 방송 V!")+"description="+encodeURIComponent("V는 모바일로 쉽게 볼 수 있는 스타의 실시간 개인방송 APP입니다.")+"";
+   location.href = testUrl;
    
  });
 
