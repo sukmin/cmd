@@ -212,46 +212,74 @@
         _scrapNaverForPC : function(sType,sInstanceUrl){
 
           if(this._isIE11Under()){
+
             // blog&cafe PC API는 euc-kr 기반
             document.charset = 'euc-kr';
-          }
 
-          if(this._elCafeBlogOpenWindow !== null){
-              this._elCafeBlogOpenWindow.close();
-              this._elCafeBlogOpenWindow = null;
-          }
+            if(this._elCafeBlogOpenWindow !== null){
+                this._elCafeBlogOpenWindow.close();
+                this._elCafeBlogOpenWindow = null;
+            }
 
-          this._setNaverScrapInputData(sInstanceUrl);
+            this._setNaverScrapInputData(sInstanceUrl);
 
-          var scrapForm$ = $("#JScrapForm");
+            var scrapForm$ = $("#JScrapForm");
 
-          if(sType == "cafe"){
-              scrapForm$.attr("action","http://cafe.naver.com/CafeScrapView.nhn");
-          }else if(sType == "blog"){
-              scrapForm$.attr("action","http://blog.naver.com/ScrapForm.nhn");
-          }else{
-              // do noting
-          }
+            if(sType == "cafe"){
+                scrapForm$.attr("action","http://cafe.naver.com/CafeScrapView.nhn");
+            }else if(sType == "blog"){
+                scrapForm$.attr("action","http://blog.naver.com/ScrapForm.nhn");
+            }else{
+                // do noting
+            }
 
-          this._elCafeBlogOpenWindow = window.open("about:blank",this.sCafeBlogOpenWindowName,"width=400, height=290");
-          scrapForm$.attr("target",this.sCafeBlogOpenWindowName);
+            this._elCafeBlogOpenWindow = window.open("about:blank",this.sCafeBlogOpenWindowName,"width=400, height=290");
+            scrapForm$.attr("target",this.sCafeBlogOpenWindowName);
 
-          var oSelf = this;
+            if( this._elCafeBlogOpenWindow !== null ){
+                scrapForm$.submit();
+                document.charset = 'utf-8';
+            }else{
+                setTimeout(function(){
+                    scrapForm$.submit();
+                    document.charset = 'utf-8';
+                },500);
+            }
 
-          if( this._elCafeBlogOpenWindow !== null ){
-              scrapForm$.submit();
-              if(this._isIE11Under()){
-                // blog&cafe PC API는 euc-kr 기반
-                document.charset = 'euc-kr';
-              }
-          }else{
-              setTimeout(function(){
-                  scrapForm$.submit();
-                  if(oSelf._isIE11Under()){
-                    // blog&cafe PC API는 euc-kr 기반
-                    document.charset = 'euc-kr';
-                  }
-              },500);
+          }else {
+
+            if(this._elCafeBlogOpenWindow !== null){
+                this._elCafeBlogOpenWindow.close();
+                this._elCafeBlogOpenWindow = null;
+            }
+
+            this._setNaverScrapInputData(sInstanceUrl);
+
+            var scrapForm$ = $("#JScrapForm");
+
+            if(sType == "cafe"){
+                scrapForm$.attr("action","http://cafe.naver.com/CafeScrapView.nhn");
+            }else if(sType == "blog"){
+                scrapForm$.attr("action","http://blog.naver.com/ScrapForm.nhn");
+            }else{
+                // do noting
+            }
+
+            this._elCafeBlogOpenWindow = window.open("about:blank",this.sCafeBlogOpenWindowName,"width=400, height=290");
+            scrapForm$.attr("target",this.sCafeBlogOpenWindowName);
+
+            scrapForm$.prop("acceptCharset","euc-kr");
+
+            if( this._elCafeBlogOpenWindow !== null ){
+                scrapForm$.submit();
+                scrapForm$.prop("acceptCharset","utf-8");
+            }else{
+                setTimeout(function(){
+                    scrapForm$.submit();
+                    scrapForm$.prop("acceptCharset","utf-8");
+                },500);
+            }
+
           }
         },
 
