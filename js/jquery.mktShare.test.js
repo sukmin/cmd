@@ -70,7 +70,7 @@
 
                 html += "<form name='JScrapForm' id='JScrapForm' method='post' accept-charset='utf-8' target='_self'>";
                 html += "<input type='hidden' name='blogId' id='cafe_blog_blogId' value='naver'>";
-                html += "<input type='hidden' name='source_type' id='cafe_blog_source_type' value='112'>"; //66
+                html += "<input type='hidden' name='source_type' id='cafe_blog_source_type' value='66'>"; //66 , mobile 112
                 html += "<input type='hidden' name='source_title' id='cafe_blog_source_title'>";
                 html += "<input type='hidden' name='source_url' id='cafe_blog_source_url'>";
                 html += "<input type='hidden' name='title' id='cafe_blog_title'>";
@@ -216,15 +216,15 @@
           this._elCafeBlogOpenWindow = window.open("about:blank",this.sCafeBlogOpenWindowName,"width=400, height=290");
           scrapForm$.attr("target",this.sCafeBlogOpenWindowName);
 
-          scrapForm$.prop("acceptCharset","euc-kr");
+
 
           if( this._elCafeBlogOpenWindow !== null ){
               scrapForm$.submit();
-              scrapForm$.prop("acceptCharset","utf-8");
+
           }else{
               setTimeout(function(){
                   scrapForm$.submit();
-                  scrapForm$.prop("acceptCharset","utf-8");
+
               },500);
           }
         },
