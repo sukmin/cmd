@@ -42,6 +42,7 @@ function addIframe(){
     htmls += '<meta charset="euc-kr" />';
     htmls += '<meta http-equiv="Content-Type" content="text/html; charset=euc-kr" />';
     htmls += '</head>';
+    htmls += '<body>';
     htmls += '<form name="JScrapForm" id="JScrapForm" method="post" accept-charset="euc-kr" action="http://blog.naver.com/ScrapForm.nhn" target="testWindow" >';
     htmls += '<input type="hidden" name="blogId" id="cafe_blog_title_blogId" value="naver">';
     htmls += '<input type="hidden" name="source_type" id="cafe_blog_source_type" value="66">';
@@ -56,6 +57,7 @@ function addIframe(){
     htmls += 'function setData(oData){ document.getElementById("cafe_blog_source_title").value = oData.sourceTitle; document.getElementById("cafe_blog_source_url").value = oData.sourceUrl; document.getElementById("cafe_blog_title").value = oData.title; document.getElementById("cafe_blog_source_contents").value = oData.contents; } ';
     htmls += 'function openWindow(){ window.open("about:blank","testWindow","width=400, height=290"); }';
     htmls +=  '</script>';
+    htmls += '</body>';
     htmls += '</html>';
   htmls += '</iframe>';
 
