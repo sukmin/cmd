@@ -67,10 +67,10 @@
 
             var html ="";
 
-            if(this.isMobile()){
+
                 html += "<form name='JScrapForm' id='JScrapForm' method='post' accept-charset='utf-8' target='_self'>";
                 html += "<input type='hidden' name='blogId' id='cafe_blog_blogId' value='naver'>";
-                html += "<input type='hidden' name='source_type' id='cafe_blog_source_type' value='112'>";
+                html += "<input type='hidden' name='source_type' id='cafe_blog_source_type' value='112'>"; //66
                 html += "<input type='hidden' name='source_title' id='cafe_blog_source_title'>";
                 html += "<input type='hidden' name='source_url' id='cafe_blog_source_url'>";
                 html += "<input type='hidden' name='title' id='cafe_blog_title'>";
@@ -79,18 +79,7 @@
                 html += "<input type='hidden' name='callbackEncoding' id='cafe_blog_callbackEncoding' value='false'>";
                 html += "<input type='hidden' name='returnUrl' id='cafe_blog_returnUrl' value='" + encodeURIComponent(sUrl) + "'>";
                 html += "</form>";
-            }else{
-                html += "<form name='JScrapForm' id='JScrapForm' method='post' accept-charset='euc-kr'>";
-                html += "<input type='hidden' name='blogId' id='cafe_blog_title_blogId' value='naver'>";
-                html += "<input type='hidden' name='source_type' id='cafe_blog_source_type' value='66'>";
-                html += "<input type='hidden' name='source_title' id='cafe_blog_source_title'>";
-                html += "<input type='hidden' name='source_url' id='cafe_blog_source_url'>";
-                html += "<input type='hidden' name='title' id='cafe_blog_title'>";
-                html += "<input type='hidden' name='source_contents' id='cafe_blog_source_contents'>";
-                html += "<input type='hidden' name='callbackUrl' id='cafe_blog_callbackUrl' value=''>";
-                html += "<input type='hidden' name='callbackEncoding' id='cafe_blog_callbackEncoding' value='false'>";
-                html += "</form>";
-            }
+
 
             $("body").append(html);
 
@@ -195,11 +184,7 @@
             $("#cafe_blog_source_title").val(this.oOptions.cafeBlogSourceTitle);
             $("#cafe_blog_source_url").val(this.oOptions.cafeBlogSourceUrl);
 
-            if(this.isMobile()){
-                $("#cafe_blog_title").val(this._replaceXssString(this._getMessage("cafeBlog")));
-            }else{
-                $("#cafe_blog_title").val(this._getMessage("cafeBlog"));
-            }
+            $("#cafe_blog_title").val(this._replaceXssString(this._getMessage("cafeBlog")));
 
 
             var sContents = '<div class="layer2">';
@@ -211,75 +196,36 @@
 
         _scrapNaverForPC : function(sType,sInstanceUrl){
 
-          if(this._isIE11Under()){
+          if(this._elCafeBlogOpenWindow !== null){
+              this._elCafeBlogOpenWindow.close();
+              this._elCafeBlogOpenWindow = null;
+          }
 
-            // blog&cafe PC API는 euc-kr 기반
-            document.charset = 'euc-kr';
+          this._setNaverScrapInputData(sInstanceUrl);
 
-            if(this._elCafeBlogOpenWindow !== null){
-                this._elCafeBlogOpenWindow.close();
-                this._elCafeBlogOpenWindow = null;
-            }
+          var scrapForm$ = $("#JScrapForm");
 
-            this._setNaverScrapInputData(sInstanceUrl);
+          if(sType == "cafe"){
+              scrapForm$.attr("action","http://m.cafe.naver.com/CafeScrapView.nhn");
+          }else if(sType == "blog"){
+              scrapForm$.attr("action","http://m.blog.naver.com/OpenScrapForm.nhn");
+          }else{
+              // do noting
+          }
 
-            var scrapForm$ = $("#JScrapForm");
+          this._elCafeBlogOpenWindow = window.open("about:blank",this.sCafeBlogOpenWindowName,"width=400, height=290");
+          scrapForm$.attr("target",this.sCafeBlogOpenWindowName);
 
-            if(sType == "cafe"){
-                scrapForm$.attr("action","http://cafe.naver.com/CafeScrapView.nhn");
-            }else if(sType == "blog"){
-                scrapForm$.attr("action","http://blog.naver.com/ScrapForm.nhn");
-            }else{
-                // do noting
-            }
+          scrapForm$.prop("acceptCharset","euc-kr");
 
-            this._elCafeBlogOpenWindow = window.open("about:blank",this.sCafeBlogOpenWindowName,"width=400, height=290");
-            scrapForm$.attr("target",this.sCafeBlogOpenWindowName);
-
-            if( this._elCafeBlogOpenWindow !== null ){
-                scrapForm$.submit();
-                document.charset = 'utf-8';
-            }else{
-                setTimeout(function(){
-                    scrapForm$.submit();
-                    document.charset = 'utf-8';
-                },500);
-            }
-
-          }else {
-
-            if(this._elCafeBlogOpenWindow !== null){
-                this._elCafeBlogOpenWindow.close();
-                this._elCafeBlogOpenWindow = null;
-            }
-
-            this._setNaverScrapInputData(sInstanceUrl);
-
-            var scrapForm$ = $("#JScrapForm");
-
-            if(sType == "cafe"){
-                scrapForm$.attr("action","http://cafe.naver.com/CafeScrapView.nhn");
-            }else if(sType == "blog"){
-                scrapForm$.attr("action","http://blog.naver.com/ScrapForm.nhn");
-            }else{
-                // do noting
-            }
-
-            this._elCafeBlogOpenWindow = window.open("about:blank",this.sCafeBlogOpenWindowName,"width=400, height=290");
-            scrapForm$.attr("target",this.sCafeBlogOpenWindowName);
-
-            scrapForm$.prop("acceptCharset","euc-kr");
-
-            if( this._elCafeBlogOpenWindow !== null ){
-                scrapForm$.submit();
-                scrapForm$.prop("acceptCharset","utf-8");
-            }else{
-                setTimeout(function(){
-                    scrapForm$.submit();
-                    scrapForm$.prop("acceptCharset","utf-8");
-                },500);
-            }
-
+          if( this._elCafeBlogOpenWindow !== null ){
+              scrapForm$.submit();
+              scrapForm$.prop("acceptCharset","utf-8");
+          }else{
+              setTimeout(function(){
+                  scrapForm$.submit();
+                  scrapForm$.prop("acceptCharset","utf-8");
+              },500);
           }
         },
 
