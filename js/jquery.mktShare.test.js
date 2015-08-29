@@ -208,7 +208,7 @@
           if(sType == "cafe"){
               scrapForm$.attr("action","http://m.cafe.naver.com/CafeScrapView.nhn");
           }else if(sType == "blog"){
-              scrapForm$.attr("action","http://m.blog.naver.com/OpenScrapForm.nhn");
+              scrapForm$.attr("action","http://blog.naver.com/OpenScrapForm.nhn");
           }else{
               // do noting
           }
