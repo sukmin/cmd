@@ -56,9 +56,9 @@ function addIframe(){
     htmls += '<script>';
     htmls += 'function setData(oData){ document.getElementById("cafe_blog_source_title").value = oData.sourceTitle; document.getElementById("cafe_blog_source_url").value = oData.sourceUrl; document.getElementById("cafe_blog_title").value = oData.title; document.getElementById("cafe_blog_source_contents").value = oData.contents; } ';
     htmls += 'function openWindow(){ window.open("about:blank","testWindow","width=400, height=290"); }';
-    htmls +=  '</script>';
-    htmls += '</body>';
-    htmls += '</html>';
+    htmls +=  '&lt;/script&gt;';
+    htmls += '&lt;/body&gt;';
+    htmls += '&lt;/html&gt;';
   htmls += '</iframe>';
 
 
