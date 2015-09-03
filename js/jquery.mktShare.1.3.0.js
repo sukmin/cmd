@@ -524,9 +524,9 @@
 					var nTop = ($(window).height() - 400) / 2;
 					var nLeft = ($(window).width() - 555) / 2;
 
-					var sTargetUrl = this._getUrl(sInstanceUrl);
-					var sEncodedUrl = encodeURIComponent(sTargetUrl);
-					var sBlogOpenUrl = "http://blog.naver.com/openapi/share?url="+sEncodedUrl;
+					var sEncodedUrl = encodeURIComponent(this._getUrl(sInstanceUrl));
+					var sTitle = encodeURIComponent(this._getMessage("cafeBlog"));
+					var sBlogOpenUrl = "http://blog.naver.com/openapi/share?url="+sEncodedUrl+"&title="+sTitle;
 					window.open(sBlogOpenUrl, "SHARE_BLOG","width=555, height=400"+",top="+ nTop +",left=" + nLeft);
 
 				}else{
