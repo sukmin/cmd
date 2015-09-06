@@ -214,7 +214,7 @@
     	    if(this.isMobile()){
     	    	$("#cafe_blog_title").val(this._replaceXssString(this._getMessage("cafeBlog")));
     	    }else{
-    	    	$("#cafe_blog_title").val(this._getMessage("cafeBlog"));
+    	    	$("#cafe_blog_title").val(this._replaceXssString(this._getMessage("cafeBlog")));
     	    }
 
 
