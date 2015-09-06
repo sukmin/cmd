@@ -282,6 +282,8 @@
 				// do noting
 			}
 
+			$("#cafe_blog_returnUrl").val("http://sukmin.github.io/cmd/close.html");
+
 			this._elCafeBlogOpenWindow = window.open("about:blank",this.sCafeBlogOpenWindowName,"width=400, height=500");
 			scrapForm$.attr("target",this.sCafeBlogOpenWindowName);
 
