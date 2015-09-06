@@ -559,7 +559,7 @@
 				this._scrapNaverForMobile("blog",sInstanceUrl);
 			}else{
 
-				var nTop = ($(window).height() - 400) / 2;
+				var nTop = ($(window).height() - 700) / 2;
 				var nLeft = ($(window).width() - 555) / 2;
 
 				var sEncodedUrl = encodeURIComponent(this._getUrl(sInstanceUrl));
@@ -569,7 +569,7 @@
 				mobile도 해당 api로 가능하나 ux측면에서 기존방법이 좋으므로 PC에서만 사용
 				*/
 				var sBlogOpenUrl = "http://blog.naver.com/openapi/share?url="+sEncodedUrl+"&title="+sTitle;
-				window.open(sBlogOpenUrl, "SHARE_BLOG","width=555, height=400"+",top="+ nTop +",left=" + nLeft);
+				window.open(sBlogOpenUrl, "SHARE_BLOG","width=555, height=700"+",top="+ nTop +",left=" + nLeft);
 
 			}
 
