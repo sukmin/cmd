@@ -105,7 +105,7 @@
 			return (!!navigator.userAgent.match(/Trident.*rv[ :]*\d+\./));
 		},
 
-		_isWindows10AndIE11(){
+		_isWindows10AndIE11 : function(){
 			return ( this._isWindows10() && this._isIE11() );
 		},
 
