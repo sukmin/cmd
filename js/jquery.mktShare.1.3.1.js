@@ -282,7 +282,7 @@
 				// do noting
 			}
 
-			this._elCafeBlogOpenWindow = window.open("about:blank",this.sCafeBlogOpenWindowName,"width=400, height=290");
+			this._elCafeBlogOpenWindow = window.open("about:blank",this.sCafeBlogOpenWindowName,"width=400, height=500");
 			scrapForm$.attr("target",this.sCafeBlogOpenWindowName);
 
 			if( this._elCafeBlogOpenWindow !== null ){
