@@ -3,10 +3,56 @@
 <head>
 <meta charset="utf-8">
 <title>TEST</title>
+<link type="text/css" rel="stylesheet" href="http://static.pay.naver.net/layout/201509041446/css/customer/chk_n_common.css">
 </head>
 <body onload="getGNB();">
-  <div id="gnb">
-						<script type="text/javascript" charset="utf-8" src="https://static.nid.naver.com/template/gnb_utf8.nhn?2015090911"></script>
-					</div>
+
+<div id="wrap">
+
+   <!-- u_skip -->
+   <div id="u_skip">
+   </div>
+   <!-- //u_skip -->
+
+   <!-- header -->
+   <div id="header">
+     <div class="hd_inner">
+   <script type="text/javascript">
+     var nsc="checkout.all";
+     var gnb_service="checkout";
+     var gnb_template="gnb_utf8";
+     var gnb_logout=encodeURIComponent("http://pay.naver.com/about");
+     var gnb_brightness=2;
+     var gnb_item_hide_option=0;
+   </script>
+   <div class="gnb_sc" class="gnb_area">
+     <div class="site">
+       <dl>
+       <dt class="blind">패밀리사이트</dt>
+       <dd>
+         <a href="http://www.naver.com/" class="s_link1"><span>NAVER</span></a><!--N=a:GNB.naver-->
+         <a href="http://shopping.naver.com" class="s_link2"><span>지식쇼핑</span></a><!--N=a:GNB.shopping-->
+       </dd>
+       </dl>
+     </div>
+     <div class="chkout_gnb_wrap">
+       <dl class="link">
+       <dt class="blind">네이버페이링크</dt>
+       <dd>
+         <a href="http://order.pay.naver.com/main/cart">
+             장바구니
+             </span>
+         </a><!--N=a:GNB.cart-->
+       </dd>
+       </dl>
+       <!-- GNB -->
+       <div id="gnb">
+       </div>
+       <script type="text/javascript" charset="utf-8" src="http://static.gn.naver.net/template/gnb_utf8.nhn?2015090911"></script>
+       <!-- //GNB -->
+     </div>
+   </div>
+ </div>
+</div>
 </body>
 </html>
