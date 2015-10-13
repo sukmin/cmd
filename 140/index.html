@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta property="og:title" content="나는 테스트 제목입니다."/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="http://sukmin.github.io/cmd/140/index.html"/>
+<meta property="og:image" content="http://sukmin.github.io/cmd/140/img/test_1200_628.png"/>
+<meta property="og:description" content="나는 테스트 설명입니다."/>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<title>test</title>
+
+</head>
+<body>
+
+<a href="#" id="facebook">페이스북</a><br>
+<a href="#" id="twitter">트위터</a><br>
+<a href="#" id="line">라인</a><br>
+<a href="#" id="band">밴드</a><br>
+<a href="#" id="kakaoTalk">카카오톡</a><br>
+<a href="#" id="kakaoStory">카카오스토리</a><br>
+<a href="#" id="naverBlog">네이버블로그</a><br>
+<a href="#" id="naverCafe">네이버카페</a><br>
+<a href="#" id="tumblr">텀블</a><br>
+
+
+<script src="js/jquery-1.11.2.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/jquery.mktShare.1.3.1.js?2"></script>
+<script type="text/javascript">
+
+
+// init : function(sMessage, sUrl, oOptions)
+jQuery.mktShare.init("V는 모바일로 쉽게 볼 수 있는 스타의 실시간 개인방송 APP입니다." ,
+      "http://sukmin.github.io/cmd/140/index.nhn",
+			{
+				shortUrl : "http://sukmin.github.io/cmd/140/index.nhn",
+       			twitter : "테스트 트위터",
+        			band : "테스트 밴드",
+        			line : "테스트 라인",
+        			kakaoTalk : "테스트 카카오",
+				cafeBlog : "테스트 블로그 카페 제목",
+				cafeBlogImageUrl : "http://sukmin.github.io/cmd/140/test_600_366.png",
+				cafeBlogSourceTitle : "테스트 카페 블로그 타이틀",
+				cafeBlogSourceUrl : "http://sukmin.github.io/cmd/140/index.nhn" });
+
+// 페이스북버튼 이벤트 핸들러
+jQuery("#facebook").click(function(event){
+
+    event.preventDefault();
+
+    jQuery.mktShare.facebook();
+
+});
+
+// 트위터버튼 이벤트 핸들러
+jQuery("#twitter").click(function(event){
+
+    event.preventDefault();
+
+    jQuery.mktShare.twitter();
+
+});
+
+// 라인버튼 이벤트 핸들러
+jQuery("#line").click(function(event){
+
+    event.preventDefault();
+
+    jQuery.mktShare.line();
+
+});
+
+// 밴드버튼 이벤트 핸들러
+jQuery("#band").click(function(event){
+
+    event.preventDefault();
+
+    jQuery.mktShare.band();
+
+});
+
+// 카카오톡버튼 이벤트 핸들러
+jQuery("#kakaoTalk").click(function(event){
+
+    event.preventDefault();
+
+    jQuery.mktShare.kakaoTalk();
+
+});
+
+// 카카오스토리버튼 이벤트 핸들러
+jQuery("#kakaoStory").click(function(event){
+
+    event.preventDefault();
+
+    jQuery.mktShare.kakaoStory();
+
+});
+
+// 네이버블로그버튼 이벤트 핸들러
+jQuery("#naverBlog").click(function(event){
+
+    event.preventDefault();
+
+    jQuery.mktShare.naverBlog();
+
+});
+
+// 네이버카페버튼 이벤트 핸들러
+jQuery("#naverCafe").click(function(event){
+
+    event.preventDefault();
+
+    jQuery.mktShare.naverCafe();
+
+});
+
+// 텀블버튼 이벤트 핸들러
+jQuery("#tumblr").click(function(event){
+
+    event.preventDefault();
+
+    jQuery.mktShare.tumblr();
+
+});
+</script>
+
+</body>
+</html>
