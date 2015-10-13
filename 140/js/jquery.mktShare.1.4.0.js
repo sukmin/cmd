@@ -214,16 +214,12 @@
 				location.href = "intent:" + sMessage + "#Intent;package="+ sAndroidPakace +";end;";
 
 			}else{
-
-				alert(this._isIOS9());
-				alert(this._isNaverInApp());
-				if( this._isIOS9() && (this._isNaverInApp() == false) ){
-					void(window.location.href = sMessage);
-					return;
-				}
 				this._sendMarketAfter1500ms(sIosUrl, "market://details?id=" + sAndroidPakace);
-				document.body.appendChild(this._makeIframe(sIframeId, sMessage));
-
+				if( this._isIOS9() && (this._isNaverInApp() == false) ){
+					window.location.href = sMessage;
+				}else{
+					document.body.appendChild(this._makeIframe(sIframeId, sMessage));
+				}
 			}
 
 		},
