@@ -415,7 +415,7 @@
 			}
 			
 			//_sendApp : function(sMessage,sIosUrl,sAndroidPakace,sIframeId)
-			this._sendApp(sLineUrl,"https://itunes.apple.com/app/id" + "443904275" + "?mt=8"; ,"jp.naver.line.android","_shareLineIframe");
+			this._sendApp(sLineUrl,"https://itunes.apple.com/app/id" + "443904275" + "?mt=8" ,"jp.naver.line.android","_shareLineIframe");
 
 		},
 
@@ -501,7 +501,7 @@
 			var sKakaoTalkUrl = "kakaolink://send?appkey=" + sAppKey + "&appver=1.0&apiver=3.0&linkver=3.5&objs=" + encodeURIComponent(JSON.stringify(aKakao));
 
 			//_sendApp : function(sMessage,sIosUrl,sAndroidPakace,sIframeId)
-			
+
 			this._sendApp(sKakaoTalkUrl,"https://itunes.apple.com/app/id" + "362057947" + "?mt=8","com.kakao.talk","_shareKakaoTalkIframe");
 
 		},
