@@ -216,7 +216,7 @@
 			}else{
 
 				alert(this._isIOS9());
-				alert((this._isNaverInApp() == false));
+				alert(this._isNaverInApp());
 				if( this._isIOS9() && (this._isNaverInApp() == false) ){
 					void(window.location.href = sMessage);
 					return;
