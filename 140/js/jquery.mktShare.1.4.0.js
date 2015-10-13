@@ -215,7 +215,7 @@
 
 			}else{
 				if( this._isIOS9() && (this._isNaverInApp() == false) ){
-					location.href = sMessage;
+					void(window.location.href = sMessage);
 					return;
 				}
 				this._sendMarketAfter1500ms(sIosUrl, "market://details?id=" + sAndroidPakace);
