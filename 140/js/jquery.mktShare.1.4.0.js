@@ -126,7 +126,7 @@
 		},
 
 		_isNaverInApp: function() {
-            return /NAVER/.test(navigator.userAgent) || window.g_inapp && 1 === window.g_inapp
+            return !!(/NAVER/.test(navigator.userAgent) || window.g_inapp && 1 === window.g_inapp);
         },
 
 		_getShortUrl : function(sInstanceUrl){
