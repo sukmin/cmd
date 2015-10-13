@@ -125,6 +125,10 @@
 			return false;
 		},
 
+		_isNaverInApp: function() {
+            return /NAVER/.test(navigator.userAgent) || window.g_inapp && 1 === window.g_inapp
+        },
+
 		_getShortUrl : function(sInstanceUrl){
 
 			if( typeof sInstanceUrl === "string" ){
@@ -210,7 +214,11 @@
 				location.href = "intent:" + sMessage + "#Intent;package="+ sAndroidPakace +";end;";
 
 			}else{
-
+				if( this._isIOS9() && (this._isNaverInApp() == false) ){
+					location.href = sMessage;
+					location.href = sIosUrl;
+					return;
+				}
 				this._sendMarketAfter1500ms(sIosUrl, "market://details?id=" + sAndroidPakace);
 				document.body.appendChild(this._makeIframe(sIframeId, sMessage));
 
@@ -407,12 +415,15 @@
 			}
 
 			var sMessage = this._getMessage("line") + "\n\n" + this._getShortUrl(sInstanceUrl);
-			var sEncodedMessage = this._replaceXssString(encodeURIComponent(sMessage));
+
 			if(this._isIOS9()){
-				location.href = "http://line.me/R/msg/text/" + sEncodedMessage;
-			}else{
-				var sLineUrl = "line://msg/text/" + sEncodedMessage;
+				location.href = "http://line.me/R/msg/text/" + sMessage;
+				return;
 			}
+
+			var sEncodedMessage = this._replaceXssString(encodeURIComponent(sMessage));
+			
+			var sLineUrl = "line://msg/text/" + sEncodedMessage;
 			
 			//_sendApp : function(sMessage,sIosUrl,sAndroidPakace,sIframeId)
 			this._sendApp(sLineUrl,"https://itunes.apple.com/app/id" + "443904275" + "?mt=8" ,"jp.naver.line.android","_shareLineIframe");
