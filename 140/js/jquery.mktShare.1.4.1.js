@@ -415,7 +415,7 @@
 			var sMessage = this._getMessage("line") + "\n\n" + this._getShortUrl(sInstanceUrl);
 
 			if(this._isIOS9()){
-				location.href = "http://line.me/R/msg/text/" + sMessage.replace("\n", "%0A").replace("%", "%25");
+				location.href = "http://line.me/R/msg/text/" + sMessage;
 				return;
 			}
 
