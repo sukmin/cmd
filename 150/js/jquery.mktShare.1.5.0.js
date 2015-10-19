@@ -155,7 +155,7 @@
 		},
 
 		_replaceXssString : function(sEncodedString){
-			return sEncodedString.replace(/&quot;/gi, '"').replace(/&lt;/gi, "<").replace(/&gt;/gi, ">");
+			return sEncodedString.replace(/&quot;/gi, '\"').replace(/&lt;/gi, '<').replace(/&gt;/gi, '>＂');
 		},
 
 		_isAndroidChrome25VersionOver : function(){
@@ -416,7 +416,7 @@
 			var sMessage = this._getMessage("line") + "\n\n" + this._getShortUrl(sInstanceUrl);
 
 			if(this._isIOS9()){
-				location.href = "http://line.me/R/msg/text/" + sMessage;
+				location.href = "http://line.me/R/msg/text/?" + encodeURIComponent(sMessage);
 				return;
 			}
 
