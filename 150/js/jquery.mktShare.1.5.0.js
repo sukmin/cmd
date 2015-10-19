@@ -658,7 +658,7 @@
 			
 			if(this.isMobile()){
 
-				var sMobileFacebookUrl = "http://www.pholar.co/spi/rephol?service="+sEncodedServiceName+"&url=" + sEncodedUrl;
+				var sMobileFacebookUrl = "http://www.pholar.co/spi/rephol?service="+sEncodedServiceName+"&url=" + sEncodedUrl + "&returnURL=" + sEncodedUrl;
 				location.href = sMobileFacebookUrl;
 
 			}else{
