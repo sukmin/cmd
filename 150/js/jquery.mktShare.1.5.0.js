@@ -215,10 +215,10 @@
 				location.href = "intent:" + sMessage + "#Intent;package="+ sAndroidPakace +";end;";
 
 			}else{
-				this._sendMarketAfter1500ms(sIosUrl, "market://details?id=" + sAndroidPakace);
 				if( this._isIOS9() && (this._isNaverInApp() == false) ){
 					window.location.href = sMessage;
 				}else{
+					this._sendMarketAfter1500ms(sIosUrl, "market://details?id=" + sAndroidPakace);
 					document.body.appendChild(this._makeIframe(sIframeId, sMessage));
 				}
 			}
