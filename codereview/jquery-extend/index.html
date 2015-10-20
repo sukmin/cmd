@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>test</title>
+</head>
+<body>
+
+<form>
+    <input type="tel" id="input_test">
+</form>
+
+<script src="js/jquery-1.11.2.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+(function($){
+    $.numberToZeroPrefixString = function(nNumber,nStringLength){
+
+        if($.isNumeric(nNumber) == false){
+            return nNumber;
+        }
+
+        var sNumberString = nNumber.toString();
+            if(sNumberString.length >= nStringLength){
+                return sNumberString;
+            }
+            var nDiffLength  = nStringLength - sNumberString.length;
+            for(var i = 0 ; i < nDiffLength ; i++){
+                sNumberString = "0" + sNumberString;
+            }
+            return sNumberString;
+        
+    }
+})(jQuery);
+
+jQuery("#input_test").change(function(event){
+
+    var this$ = jQuery(this);
+    var sInputNumber = this$.val();
+    var sZeroPrefixNumber = jQuery.numberToZeroPrefixString(sInputNumber,5);
+    this$.val(sZeroPrefixNumber);
+
+});
+
+</script>
+</body>
+</html>
