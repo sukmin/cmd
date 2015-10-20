@@ -7,9 +7,11 @@
 </head>
 <body>
 
+<h2>jQuery 확장</h2>
 <form>
-    <input type="tel" id="input_test">
+    <input type="tel" id="input_test_util">
 </form>
+<a href="#" id="a_test_util">숫자를 0프리픽스 붙은 문자로 변환</a>
 
 <script src="js/jquery-1.11.2.min.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -34,12 +36,14 @@
     }
 })(jQuery);
 
-jQuery("#input_test").keyup(function(event){
+jQuery("#a_test_util").click(function(event){
 
-    var this$ = jQuery(this);
-    var sInputNumber = this$.val();
+    event.preventDefault();
+
+    var targetInput$ = jQuery("#input_test_util");
+    var sInputNumber = targetInput$.val();
     var sZeroPrefixNumber = jQuery.numberToZeroPrefixString(sInputNumber,5);
-    this$.val(sZeroPrefixNumber);
+    targetInput$.val(sZeroPrefixNumber);
 
 });
 
