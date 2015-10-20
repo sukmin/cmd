@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>test</title>
+</head>
+<body>
+
+<h2>jQuery 유틸리티</h2>
+<form>
+    <input type="tel" id="input_test_util">
+</form>
+<a href="#" id="a_test_util">숫자를 0프리픽스 붙은 문자로 변환</a>
+
+<script src="http://sukmin.github.io/cmd/codereview/jquery-extend/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+(function($){
+    $.numberToZeroPrefixString = function(nNumber,nStringLength){
+
+        if($.isNumeric(nNumber) == false){
+            return nNumber;
+        }
+
+        var sNumberString = nNumber.toString();
+            if(sNumberString.length >= nStringLength){
+                return sNumberString;
+            }
+            var nDiffLength  = nStringLength - sNumberString.length;
+            for(var i = 0 ; i < nDiffLength ; i++){
+                sNumberString = "0" + sNumberString;
+            }
+            return sNumberString;
+        
+    }
+})(jQuery);
+
+jQuery("#a_test_util").click(function(event){
+
+    event.preventDefault();
+
+    var targetInput$ = jQuery("#input_test_util");
+    var sInputNumber = targetInput$.val();
+    var sZeroPrefixNumber = jQuery.numberToZeroPrefixString(sInputNumber,5);
+    targetInput$.val(sZeroPrefixNumber);
+
+});
+
+</script>
+</body>
+</html>

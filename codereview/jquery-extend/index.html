@@ -7,13 +7,27 @@
 </head>
 <body>
 
-<h2>jQuery 확장</h2>
+<h2>jQuery 유틸리티</h2>
 <form>
     <input type="tel" id="input_test_util">
 </form>
 <a href="#" id="a_test_util">숫자를 0프리픽스 붙은 문자로 변환</a>
 
-<script src="js/jquery-1.11.2.min.js" type="text/javascript"></script>
+<h2>jQuery 플러그인</h2>
+<div id="div_spinbox_area">
+</div>
+<a href="#" id="a_spinbox_plus">+</a>
+<a href="#" id="a_spinbox_minus">-</a>
+
+<h2>jQuery 플러그인2</h2>
+<div id="div_spinbox_area2">
+</div>
+<a href="#" id="a_spinbox_plus2">+</a>
+<a href="#" id="a_spinbox_minus2">-</a>
+<br><br>
+<a href="#" id="a_kkak">깍두기 버튼</a>
+
+<script src="http://sukmin.github.io/cmd/codereview/jquery-extend/js/jquery-1.11.2.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 
 (function($){
@@ -47,6 +61,395 @@ jQuery("#a_test_util").click(function(event){
 
 });
 
+//1.함수
+/*
+var nCount = 0;
+function draw(){
+    jQuery("#div_spinbox_area").html(nCount);
+}
+
+function plus(){
+    nCount++;
+    draw();
+}
+
+function minus(){
+    nCount--;
+    draw();
+}
+
+jQuery("#a_spinbox_plus").click(function(event){
+
+    event.preventDefault();
+    plus();
+
+});
+
+jQuery("#a_spinbox_minus").click(function(event){
+
+    event.preventDefault();
+    minus();
+
+});
+
+draw();
+*/
+
+//2.리터럴객체
+/*
+var oSpinbox = {
+    //멤버
+    nCount : 0,
+    $sCountArea : null,
+    $sPlusButton : null,
+    $sMinusButton : null,
+
+    //메소드
+    draw : function(){
+        this.$sCountArea.html(this.nCount);
+    },
+    plus : function(){
+        this.nCount++;
+        this.draw();
+    },
+    minus : function(){
+        this.nCount--;
+        this.draw();
+    },
+    init : function(){
+        var oSelf = this;
+
+        oSelf.$sCountArea = jQuery("#div_spinbox_area");
+        oSelf.$sPlusButton = jQuery("#a_spinbox_plus");
+        oSelf.$sMinusButton = jQuery("#a_spinbox_minus");
+
+        oSelf.$sPlusButton.click(function(event){
+            event.preventDefault();
+            oSelf.plus();
+        });
+
+        oSelf.$sMinusButton.click(function(event){
+            event.preventDefault();
+            oSelf.minus();
+        });
+
+        oSelf.draw();
+    }
+};
+
+oSpinbox.init();
+*/
+
+//3.클래스
+/*
+function Spinbox(sCountAreaSelector,sPlusButtonSelector,sMinusButtonSelector){
+    this.nCount = 0;
+    this.$sCountArea = null;
+    this.$sPlusButton = null;
+    this.$sMinusButton = null;
+
+    this.draw = function(){
+        this.$sCountArea.html(this.nCount);
+    };
+
+    this.plus = function(){
+        this.nCount++;
+        this.draw();
+    };
+
+    this.minus = function(){
+        this.nCount--;
+        this.draw();
+    };
+
+    (function(oSelf){
+
+        oSelf.$sCountArea = jQuery(sCountAreaSelector);
+        oSelf.$sPlusButton = jQuery(sPlusButtonSelector);
+        oSelf.$sMinusButton = jQuery(sMinusButtonSelector);
+
+        oSelf.$sPlusButton.click(function(event){
+            event.preventDefault();
+            oSelf.plus();
+        });
+
+        oSelf.$sMinusButton.click(function(event){
+            event.preventDefault();
+            oSelf.minus();
+        });
+
+        oSelf.draw();
+    })(this);
+}
+
+new Spinbox("#div_spinbox_area","#a_spinbox_plus","#a_spinbox_minus");
+new Spinbox("#div_spinbox_area2","#a_spinbox_plus2","#a_spinbox_minus2");
+*/
+
+//4.프로토타이핑 클래스
+/*
+function Spinbox(sCountAreaSelector,sPlusButtonSelector,sMinusButtonSelector){
+    this.nCount = 0;
+    this.$sCountArea = null;
+    this.$sPlusButton = null;
+    this.$sMinusButton = null;
+
+    
+
+    (function(oSelf){
+
+        oSelf.$sCountArea = jQuery(sCountAreaSelector);
+        oSelf.$sPlusButton = jQuery(sPlusButtonSelector);
+        oSelf.$sMinusButton = jQuery(sMinusButtonSelector);
+
+        oSelf.$sPlusButton.click(function(event){
+            event.preventDefault();
+            oSelf.plus();
+        });
+
+        oSelf.$sMinusButton.click(function(event){
+            event.preventDefault();
+            oSelf.minus();
+        });
+
+        oSelf.draw();
+    })(this);
+}
+
+Spinbox.prototype.draw = function(){
+        this.$sCountArea.html(this.nCount);
+};
+
+Spinbox.prototype.plus = function(){
+        this.nCount++;
+        this.draw();
+};
+
+Spinbox.prototype.minus = function(){
+        this.nCount--;
+        this.draw();
+};
+
+new Spinbox("#div_spinbox_area","#a_spinbox_plus","#a_spinbox_minus");
+new Spinbox("#div_spinbox_area2","#a_spinbox_plus2","#a_spinbox_minus2");
+*/
+
+//5.jQuery플러그인
+/*
+(function($){
+
+function Spinbox(sCountAreaSelector,sPlusButtonSelector,sMinusButtonSelector){
+    this.nCount = 0;
+    this.$sCountArea = null;
+    this.$sPlusButton = null;
+    this.$sMinusButton = null;
+
+    
+
+    (function(oSelf){
+
+        oSelf.$sCountArea = jQuery(sCountAreaSelector);
+        oSelf.$sPlusButton = jQuery(sPlusButtonSelector);
+        oSelf.$sMinusButton = jQuery(sMinusButtonSelector);
+
+        oSelf.$sPlusButton.click(function(event){
+            event.preventDefault();
+            oSelf.plus();
+        });
+
+        oSelf.$sMinusButton.click(function(event){
+            event.preventDefault();
+            oSelf.minus();
+        });
+
+        oSelf.draw();
+    })(this);
+}
+
+Spinbox.prototype.draw = function(){
+        this.$sCountArea.html(this.nCount);
+};
+
+Spinbox.prototype.plus = function(){
+        this.nCount++;
+        this.draw();
+};
+
+Spinbox.prototype.minus = function(){
+        this.nCount--;
+        this.draw();
+};
+
+    $.fn.spinbox = function(sPlusButtonSelector,sMinusButtonSelector){
+        this.each(function(index){
+            var oSpinbox = new Spinbox(this,sPlusButtonSelector,sMinusButtonSelector);
+        })
+        return this;
+    }
+})(jQuery);
+
+jQuery("#div_spinbox_area").spinbox("#a_spinbox_plus","#a_spinbox_minus");
+jQuery("#div_spinbox_area2").spinbox("#a_spinbox_plus2","#a_spinbox_minus2");
+*/
+
+//6.jQuery플러그인 옵션객체사용
+/*
+(function($){
+
+    $.oSpinboxDefaultOptions = {
+        sPlusButtonSelector : "#a_spinbox_plus",
+        sMinusButtonSelector : "#a_spinbox_minus"
+    };
+
+function Spinbox(sCountAreaSelector,sPlusButtonSelector,sMinusButtonSelector){
+    this.nCount = 0;
+    this.$sCountArea = null;
+    this.$sPlusButton = null;
+    this.$sMinusButton = null;
+
+    
+
+    (function(oSelf){
+
+        oSelf.$sCountArea = jQuery(sCountAreaSelector);
+        oSelf.$sPlusButton = jQuery(sPlusButtonSelector);
+        oSelf.$sMinusButton = jQuery(sMinusButtonSelector);
+
+        oSelf.$sPlusButton.click(function(event){
+            event.preventDefault();
+            oSelf.plus();
+        });
+
+        oSelf.$sMinusButton.click(function(event){
+            event.preventDefault();
+            oSelf.minus();
+        });
+
+        oSelf.draw();
+    })(this);
+}
+
+Spinbox.prototype.draw = function(){
+        this.$sCountArea.html(this.nCount);
+};
+
+Spinbox.prototype.plus = function(){
+        this.nCount++;
+        this.draw();
+};
+
+Spinbox.prototype.minus = function(){
+        this.nCount--;
+        this.draw();
+};
+
+    $.fn.spinbox = function(oOptions){
+
+        //변경된 부분
+        oOptions = $.extend(null,$.oSpinboxDefaultOptions,oOptions);
+
+        this.each(function(index){
+            // 사실 스핀박스 안에서 근본적으로 옵션처리를 해주면 된다.
+            var oSpinbox = new Spinbox(this,oOptions.sPlusButtonSelector,oOptions.sMinusButtonSelector);
+        })
+        return this;
+    };
+})(jQuery);
+
+jQuery("#div_spinbox_area").spinbox();
+jQuery("#div_spinbox_area2").spinbox({
+    sPlusButtonSelector : "#a_spinbox_plus2",
+    sMinusButtonSelector : "#a_spinbox_minus2"
+});
+*/
+
+//7.jQuery플러그인 그리고 또 플러그인
+(function($){
+
+    $.oSpinboxDefaultOptions = {
+        sPlusButtonSelector : "#a_spinbox_plus",
+        sMinusButtonSelector : "#a_spinbox_minus"
+    };
+
+function Spinbox(sCountAreaSelector,sPlusButtonSelector,sMinusButtonSelector){
+    this.nCount = 0;
+    this.$sCountArea = null;
+    this.$sPlusButton = null;
+    this.$sMinusButton = null;
+
+    
+
+    (function(oSelf){
+
+        oSelf.$sCountArea = jQuery(sCountAreaSelector);
+        oSelf.$sPlusButton = jQuery(sPlusButtonSelector);
+        oSelf.$sMinusButton = jQuery(sMinusButtonSelector);
+
+        oSelf.$sPlusButton.click(function(event){
+            event.preventDefault();
+            oSelf.plus();
+        });
+
+        oSelf.$sMinusButton.click(function(event){
+            event.preventDefault();
+            oSelf.minus();
+        });
+
+        oSelf.draw();
+    })(this);
+}
+
+Spinbox.prototype.draw = function(){
+        this.$sCountArea.html(this.nCount);
+};
+
+Spinbox.prototype.plus = function(){
+        this.nCount++;
+        this.draw();
+};
+
+Spinbox.prototype.minus = function(){
+        this.nCount--;
+        this.draw();
+};
+
+    $.fn.spinbox = function(oOptions){
+
+        //변경된 부분
+        oOptions = $.extend(null,$.oSpinboxDefaultOptions,oOptions);
+
+        this.each(function(index){
+            // 사실 스핀박스 안에서 근본적으로 옵션처리를 해주면 된다.
+            var oSpinbox = new Spinbox(this,oOptions.sPlusButtonSelector,oOptions.sMinusButtonSelector);
+            $(this).data("spinbox",oSpinbox);
+        });
+        return this;
+    };
+
+    $.fn.plusForSpinbox = function(){
+
+        this.each(function(index){
+            var oSpinbox = $(this).data("spinbox");
+            if(oSpinbox){
+                oSpinbox.plus();
+            }
+        });
+        return this;
+        
+    };
+
+})(jQuery);
+
+jQuery("#div_spinbox_area").spinbox();
+jQuery("#div_spinbox_area2").spinbox({
+    sPlusButtonSelector : "#a_spinbox_plus2",
+    sMinusButtonSelector : "#a_spinbox_minus2"
+});
+
+jQuery("#a_kkak").click(function(event){
+    event.preventDefault();
+    jQuery("#div_spinbox_area2").plusForSpinbox();
+});
 </script>
 </body>
 </html>

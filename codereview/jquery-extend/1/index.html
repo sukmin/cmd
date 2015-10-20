@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>test</title>
+</head>
+<body>
+
+<h2>jQuery 플러그인</h2>
+<div id="div_spinbox_area">
+</div>
+<a href="#" id="a_spinbox_plus">+</a>
+<a href="#" id="a_spinbox_minus">-</a>
+
+
+<script src="http://sukmin.github.io/cmd/codereview/jquery-extend/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+
+var nCount = 0;
+function draw(){
+    jQuery("#div_spinbox_area").html(nCount);
+}
+
+function plus(){
+    nCount++;
+    draw();
+}
+
+function minus(){
+    nCount--;
+    draw();
+}
+
+jQuery("#a_spinbox_plus").click(function(event){
+
+    event.preventDefault();
+    plus();
+
+});
+
+jQuery("#a_spinbox_minus").click(function(event){
+
+    event.preventDefault();
+    minus();
+
+});
+
+draw();
+</script>
+</body>
+</html>

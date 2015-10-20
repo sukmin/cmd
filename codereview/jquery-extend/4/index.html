@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>test</title>
+</head>
+<body>
+
+<h2>jQuery 플러그인</h2>
+<div id="div_spinbox_area">
+</div>
+<a href="#" id="a_spinbox_plus">+</a>
+<a href="#" id="a_spinbox_minus">-</a>
+
+<h2>jQuery 플러그인2</h2>
+<div id="div_spinbox_area2">
+</div>
+<a href="#" id="a_spinbox_plus2">+</a>
+<a href="#" id="a_spinbox_minus2">-</a>
+
+<script src="http://sukmin.github.io/cmd/codereview/jquery-extend/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+function Spinbox(sCountAreaSelector,sPlusButtonSelector,sMinusButtonSelector){
+    this.nCount = 0;
+    this.$sCountArea = null;
+    this.$sPlusButton = null;
+    this.$sMinusButton = null;
+
+    
+
+    (function(oSelf){
+
+        oSelf.$sCountArea = jQuery(sCountAreaSelector);
+        oSelf.$sPlusButton = jQuery(sPlusButtonSelector);
+        oSelf.$sMinusButton = jQuery(sMinusButtonSelector);
+
+        oSelf.$sPlusButton.click(function(event){
+            event.preventDefault();
+            oSelf.plus();
+        });
+
+        oSelf.$sMinusButton.click(function(event){
+            event.preventDefault();
+            oSelf.minus();
+        });
+
+        oSelf.draw();
+    })(this);
+}
+
+Spinbox.prototype.draw = function(){
+        this.$sCountArea.html(this.nCount);
+};
+
+Spinbox.prototype.plus = function(){
+        this.nCount++;
+        this.draw();
+};
+
+Spinbox.prototype.minus = function(){
+        this.nCount--;
+        this.draw();
+};
+
+new Spinbox("#div_spinbox_area","#a_spinbox_plus","#a_spinbox_minus");
+new Spinbox("#div_spinbox_area2","#a_spinbox_plus2","#a_spinbox_minus2");
+</script>
+</body>
+</html>
