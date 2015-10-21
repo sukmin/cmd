@@ -417,7 +417,6 @@ Spinbox.prototype.minus = function(){
 
         //변경된 부분
         oOptions = $.extend(null,$.oSpinboxDefaultOptions,oOptions);
-
         this.each(function(index){
             // 사실 스핀박스 안에서 근본적으로 옵션처리를 해주면 된다.
             var oSpinbox = new Spinbox(this,oOptions.sPlusButtonSelector,oOptions.sMinusButtonSelector);
@@ -441,6 +440,7 @@ Spinbox.prototype.minus = function(){
 })(jQuery);
 
 jQuery("#div_spinbox_area").spinbox();
+
 jQuery("#div_spinbox_area2").spinbox({
     sPlusButtonSelector : "#a_spinbox_plus2",
     sMinusButtonSelector : "#a_spinbox_minus2"
@@ -451,6 +451,19 @@ jQuery("#a_kkak").click(function(event){
     jQuery("#div_spinbox_area2").plusForSpinbox();
 });
 
+/*
+(function($){
+     $.fn.test1 = function(oOptions){
+        this.each(function(index){
+            console.dir(this);
+        });
+        return this;
+    };
+ 
+})(jQuery);
+
+jQuery("#test").test1();
+*/
 </script>
 </body>
 </html>
