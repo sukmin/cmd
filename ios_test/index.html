@@ -1,7 +1,14 @@
 <html>
 <body>
+<a href="#" id="a_test">test</a>
+<script src="http://sukmin.github.io/cmd/js/jquery-1.11.2.min.js" type="text/javascript"></script>
 <script type="text/javascript">
+jQuery("#a_test").click(function(event){
+
+	event.preventDefault();
 	location.href = "naversearchapp://inappbrowser?url=https%3A%2F%2Fm.pay.naver.com%2Fmobile%2Fsetting%2Fhome&target=new&version=6";
+
+});
 </script>
 </body>
 </html>
