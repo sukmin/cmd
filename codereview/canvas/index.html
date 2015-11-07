@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>canvas</title>
+</head>
+<body>
+
+<canvas id="cv" width="340" height="120" style="position: relative; border: 1px solid #000;"></canvas>  
+<script type="text/javascript"> 
+  var canvas = document.getElementById("cv");
+  var context = canvas.getContext("2d");           
+   
+  context.fillRect(10,10,100,100);    //색으로채운 사각형
+  context.strokeRect(120,10,100,100); //윤곽만 있는 사각형
+   
+  context.fillRect(230,10,100,100);   //색으로 채운 사각형
+  context.clearRect(230,10,50,50);    //앞 사각형의 절반을 지움
+</script> 
+</body>
+</html>
