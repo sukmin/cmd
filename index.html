@@ -3,12 +3,11 @@
   <head>
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta property="og:title" content="[8월 오픈] 스타들의 각본 없는 실시간 방송 V!"/>
+<meta property="og:title" content="네이버페이 체크카드 사전신청"/>
 <meta property="og:type" content="article"/>
 <meta property="og:url" content="http://sukmin.github.io/cmd/"/>
-<meta property="og:image" content="https://campaign.naver.com/v/event/img/facebook01.png"/>
-<meta property="og:image" content="http://sukmin.github.io/cmd/img/test_600_366.png"/>
-<meta property="og:description" content="V는 모바일로 쉽게 볼 수 있는 스타의 실시간 개인방송 APP입니다."/>
+<meta property="og:image" content="http://campaign.naver.com/x2/img/sns_1200X628.jpg"/>
+<meta property="og:description" content="지금 2순간 신청하면 혜택이 2배! 연회비 0원, 전월실적 무관, 언제 어디서나 2% 적립."/>
 <meta property="og:article:thumbnailUrl" content="http://bookmarkimgs.naver.com/img/naver_profile.png"/>
 <meta property="og:article:author" content="V app 출시 알림"/>
 <meta property="og:article:author:url" content="http://sukmin.github.io/cmd/"/>
@@ -47,18 +46,16 @@
 
 
 // init : function(sMessage, sUrl, oOptions)
-jQuery.mktShare.init("V는 모바일로 쉽게 볼 수 있는 스타의 실시간 개인방송 APP입니다." ,
-      "http://sukmin.github.io/cmd/",
-			{
-				shortUrl : "http://sukmin.github.io/cmd/",
-       			twitter : "[8월 오픈] 스타들의 각본 없는 실시간 방송 V! V앱 출시 알림 예약하면, 스타들이 소원을 들어드려요.",
-        			band : "스타들의 각본 없는 실시간 방송 V! V앱 출시 알림 예약하면, 스타들이 소원을 들어드려요.",
-        			line : "[8월 오픈] 스타들의 각본 없는 실시간 방송 V! V앱 출시 알림 예약하면, 스타들이 소원을 들어드려요.",
-        			kakaoTalk : "[8월 오픈] 스타들의 각본 없는 실시간 방송 V! V앱 출시 알림 예약하면, 스타들이 소원을 들어드려요.",
-				cafeBlog : "[8월 오픈] 스타들의 각본 없는 실시간 방송 V!",
-				cafeBlogImageUrl : "https://campaign.naver.com/v/event/img/cafeblog01.png",
-				cafeBlogSourceTitle : "스타들의 각본 없는 실시간 방송 V",
-				cafeBlogSourceUrl : "http://sukmin.github.io/cmd/" });
+$.mktShare.init("네이버페이 체크카드 사전신청하고 2배 혜택 받으세요!" , "http://sukmin.github.io/cmd/",
+      { 
+        shortUrl : "https://campaign.naver.com/x2/",
+        cafeBlog : "네이버페이 체크카드 사전신청하고 2배 혜택 받으세요!",
+        cafeBlogImageUrl : "http://campaign.naver.com/x2/img/sns_740X628.jpg",
+        cafeBlogSourceTitle : "네이버페이 체크카드 사전신청",
+        cafeBlogSourceUrl : "http://sukmin.github.io/cmd/",
+        pholarName : "네이버페이" });
+
+
 
 // 페이스북버튼 이벤트 핸들러
 jQuery("#facebook").click(function(event){
